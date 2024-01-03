@@ -15,6 +15,11 @@ const router = createRouter({
       component: () => import('../views/AddNoteView.vue')
     },
     {
+      path: '/notes',
+      name: 'all-notes',
+      component: () => import('../views/AllNotesView.vue')
+    },
+    {
       path: '/notes/:id',
       name: 'note',
       // route level code-splitting

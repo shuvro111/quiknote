@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { RouterView, RouterLink } from 'vue-router'
 import Header from '@/components/Header.vue'
-import { HiSolidPlusCircle } from '@kalimahapps/vue-icons'
+import { HiSolidPlusCircle, BsEyeFill } from '@kalimahapps/vue-icons'
 </script>
 
 <template>
@@ -14,10 +14,16 @@ import { HiSolidPlusCircle } from '@kalimahapps/vue-icons'
     </template>
 
     <template #button>
-      <RouterLink class="button" to="/add-note">
-        <HiSolidPlusCircle class="btn-icon" />
-        <span>Add Note</span>
-      </RouterLink>
+      <div class="buttons-group">
+        <RouterLink class="button button-secondary" to="/notes">
+          <span>Browse Notes</span>
+          <BsEyeFill class="secondary-btn-icon" />
+        </RouterLink>
+        <RouterLink class="button" to="/add-note">
+          <HiSolidPlusCircle class="primary-btn-icon" />
+          <span>Add Note</span>
+        </RouterLink>
+      </div>
     </template>
   </Header>
   <RouterView />
@@ -35,13 +41,27 @@ import { HiSolidPlusCircle } from '@kalimahapps/vue-icons'
   font-size: 2rem;
 }
 
+.buttons-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
 .button {
   display: flex;
   align-items: center;
   gap: 0.5rem;
 }
 
-.btn-icon {
-  font-size: 1.8rem;
+.button-secondary {
+  background: none;
+  color: var(--foreground);
+}
+
+.secondary-btn-icon {
+  font-size: 1.4rem;
+}
+.primary-btn-icon {
+  font-size: 1.6rem;
 }
 </style>

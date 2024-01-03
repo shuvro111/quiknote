@@ -3,9 +3,9 @@
 
 /* semantic color variables for this project */
 :root {
-  --background: #ecfdf5;
+  --background: #ffffff;
   --foreground: #030712;
-  --accent: #ff8906;
+  --accent: #fed300;
   --accent-hover: #f8a647;
 }
 
@@ -13,7 +13,7 @@
   :root {
     --background: #030712;
     --foreground: #ecfdf5;
-    --accent: #ff8906;
+    --accent: #fed300;
     --accent-hover: #f8a647;
   }
 }
@@ -40,7 +40,6 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-weight: normal;
 }
 
 body {
@@ -67,10 +66,11 @@ button,
   width: max-content;
   background-color: var(--foreground);
   color: var(--background);
-  padding: 0.8rem 1.5rem;
-  border: none;
+  padding: 0.7rem 1.5rem;
+  border: 2px solid var(--foreground);
   border-radius: 7px;
   font-size: 1rem;
+  font-weight: 700;
   cursor: pointer;
   transition: background-color 0.3s ease-in-out;
 }

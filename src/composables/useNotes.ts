@@ -4,58 +4,57 @@ import { ref, onMounted } from 'vue'
 import { type Note } from '@/types/notes'
 
 export const useNotes = () => {
-  const storage = ref<Storage>()
   const notes = ref<Note[]>([])
 
   onMounted(() => {
-    //initialize localstorage
-    storage.value = localStorage
-
     //set empty array if no notes in localstorage
-    if (!storage.value.getItem('notes')) {
-      storage.value.setItem('notes', JSON.stringify([]))
+    if (!localStorage.getItem('notes')) {
+      localStorage.setItem('notes', JSON.stringify([]))
+    } else {
+      getAllNotes()
     }
-
-    console.log(JSON.parse(storage.value.getItem('notes')!))
   })
 
   //get all notes
   const getAllNotes = () => {
-    if (!storage.value) return
+    if (!localStorage) return
 
-    const notesData = storage.value.getItem('notes')
+    const notesData = localStorage.getItem('notes')
     if (notesData) {
       notes.value = JSON.parse(notesData)
     }
+    return notes.value
   }
 
   // get a single note
   const getNote = (id: string) => {
-    if (!storage.value) return
+    if (!localStorage) return
     const note = notes.value.find((note) => note.id === id)
     return note
   }
 
   const setNotes = () => {
-    if (!storage.value) return
-    storage.value.setItem('notes', JSON.stringify(notes.value))
+    if (!localStorage) return
+    localStorage.setItem('notes', JSON.stringify(notes.value))
+    console.log(localStorage.getItem('notes'))
   }
 
   const addNote = (note: Note) => {
-    if (!storage.value) return
+    if (!localStorage) return
     notes.value.push(note)
+    console.log(notes.value)
     setNotes()
   }
 
   const updateNote = (note: Note, id: string) => {
-    if (!storage.value) return
+    if (!localStorage) return
     const index = notes.value.findIndex((note) => note.id === id)
     notes.value[index] = note
     setNotes()
   }
 
   const deleteNote = (id: string) => {
-    if (!storage.value) return
+    if (!localStorage) return
     const index = notes.value.findIndex((note) => note.id === id)
     notes.value.splice(index, 1)
     setNotes()
