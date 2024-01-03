@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useNotes } from '@/composables/useNotes'
+import { type Note } from '@/types/notes'
+
 import Editor from '@/components/Editor/Editor.vue'
 
 import { BsArrowRight } from '@kalimahapps/vue-icons'
@@ -7,12 +10,22 @@ import { BsArrowRight } from '@kalimahapps/vue-icons'
 const title = ref('')
 const content = ref('')
 
-interface formData {
-  title: string
-  content: string
+const { addNote } = useNotes()
+
+//write a function to generate uuid
+
+const generateUuid = () => {
+  const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+    const r = (Math.random() * 16) | 0
+    const v = c === 'x' ? r : (r & 0x3) | 0x8
+    return v.toString(16)
+  })
+
+  return uuid
 }
 
-const validateData = (data: formData) => {
+//validate form data
+const validateData = (data: Note) => {
   if (data.title === '') {
     alert('Please enter a title')
     return false
@@ -26,17 +39,23 @@ const validateData = (data: formData) => {
   return true
 }
 
+//reset form
+const resetForm = () => {
+  title.value = ''
+  content.value = ''
+}
+
 const onSubmit = () => {
-  const data: formData = {
+  const data: Note = {
+    id: generateUuid(),
     title: title.value,
     content: content.value
   }
 
   if (validateData(data)) {
     //handle submit
-    //reset form
-    title.value = ''
-    content.value = ''
+    resetForm()
+    addNote(data)
   }
 }
 </script>
@@ -49,7 +68,6 @@ const onSubmit = () => {
         <button type="submit" class="button submit">Submit <BsArrowRight /></button>
       </div>
       <Editor v-model="content" />
-      {{ content }}
     </form>
   </div>
 </template>

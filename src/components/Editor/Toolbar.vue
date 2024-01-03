@@ -29,14 +29,15 @@ const menutItems: ToolItemProps[] = [
     title: 'Bold',
     command: () => editor.chain().focus().toggleBold().run(),
     disabled: !editor.can().chain().focus().toggleBold().run(),
-    class: 'bold'
+    class: !editor.isActive('bold') ? 'bold' : ''
   },
 
   {
     icon: BsTypeItalic,
     title: 'Italic',
     command: () => editor.chain().focus().toggleItalic().run(),
-    disabled: !editor.can().chain().focus().toggleItalic().run()
+    disabled: !editor.can().chain().focus().toggleItalic().run(),
+    class: !editor.isActive('italic') ? 'italic' : ''
   },
   {
     icon: BsTypeStrikethrough,

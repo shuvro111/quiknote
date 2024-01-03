@@ -4,12 +4,6 @@ import StarterKit from '@tiptap/starter-kit'
 import Toolbar from './Toolbar.vue'
 import { watch } from 'vue'
 
-// interface EditorProps {
-//   modelValue: string
-// }
-//define the props
-// const { modelValue } = defineProps<EditorProps>()
-
 const modelValue = defineModel<string>()
 
 //define the emits
@@ -19,12 +13,10 @@ watch(modelValue, (value) => {
   if (editor.value?.isEmpty) {
     modelValue.value = ''
   }
-  // editor.value?.commands.deleteNode('paragraph')
   const isSame = value === editor.value?.getHTML()
   if (!isSame) {
     editor.value?.commands.setContent(value as string)
   }
-  console.log({ editorValue: editor.value?.getHTML(), value: value as string })
 })
 
 const editor = useEditor({
@@ -32,7 +24,14 @@ const editor = useEditor({
   onUpdate: ({ editor }) => {
     emit('update:modelValue', editor.getHTML())
   },
-  extensions: [StarterKit]
+  extensions: [
+    StarterKit.configure({
+      dropcursor: false,
+      gapcursor: false,
+
+      heading: { levels: [1, 2, 3] }
+    })
+  ]
 })
 </script>
 
