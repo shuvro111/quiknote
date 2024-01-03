@@ -33,8 +33,6 @@ const onSubmit = () => {
   }
 
   if (validateData(data)) {
-    console.log(data)
-
     //handle submit
     //reset form
     title.value = ''
