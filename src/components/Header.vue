@@ -5,7 +5,6 @@ import FadeInDown from './transitions/FadeInDown.vue'
 <template>
   <header class="container header">
     <FadeInDown><slot name="title" /></FadeInDown>
-    <FadeInDown><slot name="menu" /></FadeInDown>
     <FadeInDown><slot name="button" /></FadeInDown>
   </header>
 </template>

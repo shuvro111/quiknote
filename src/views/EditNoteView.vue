@@ -23,7 +23,6 @@ onMounted(async () => {
   const id = route.params.id
   const data = await getNote(id as string)
   if (data) note.value = data
-  console.log(note.value)
 })
 
 //validate form data

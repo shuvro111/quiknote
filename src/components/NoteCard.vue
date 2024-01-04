@@ -4,31 +4,46 @@ import type { Note } from '@/types/notes'
 import { BxSolidPencil, BsStarFill, BsTrashFill, BsEyeFill } from '@kalimahapps/vue-icons'
 import { useNotes } from '@/composables/useNotes'
 
-const { note } = defineProps<{
-  note: Note
+const { filterNotes } = defineProps<{
+  // eslint-disable-next-line no-unused-vars
+  filterNotes: (id: string) => Note[]
 }>()
 
-const { updateNote } = useNotes()
+const note = defineModel<Note>()
 
-const toggleFavorite = () => {
-  updateNote(
-    {
-      ...note,
-      isFavorite: !note.isFavorite
-    },
-    note.id
-  )
+const { updateNote, deleteNote } = useNotes()
+
+const toggleFavorite = (id: string) => {
+  if (note.value) {
+    updateNote(
+      {
+        ...note.value,
+        isFavorite: !note.value.isFavorite
+      },
+      id
+    )
+
+    note.value.isFavorite = !note.value.isFavorite
+  }
+}
+
+const removeNote = (id: string) => {
+  if (window.confirm('Are you sure you want to delete this note?')) {
+    deleteNote(id)
+    //destroy the note
+    filterNotes(id)
+  }
 }
 </script>
 
 <template>
-  <div class="card">
+  <div class="card" v-if="note">
     <div class="top">
       <h3>{{ note.title }}</h3>
       <button
         class="action-button"
         :class="{ favorite: note.isFavorite }"
-        @click="toggleFavorite"
+        @click="toggleFavorite(note.id)"
         :title="note.isFavorite ? 'Remove From Favorites' : 'Add To Favorites'"
       >
         <BsStarFill />
@@ -37,13 +52,13 @@ const toggleFavorite = () => {
     <div class="bottom">
       <p>{{ note.createdAt }}</p>
       <div class="action-buttons">
-        <RouterLink class="action-button" :to="`notes/edit/${note.id}`" title="View">
+        <RouterLink class="action-button" :to="`notes/${note.id}`" title="View">
           <BsEyeFill />
         </RouterLink>
         <RouterLink class="action-button" :to="`notes/edit/${note.id}`" title="Edit">
           <BxSolidPencil />
         </RouterLink>
-        <button class="action-button" @click="toggleFavorite" title="delete">
+        <button class="action-button" @click="removeNote(note.id)" title="delete">
           <BsTrashFill />
         </button>
       </div>

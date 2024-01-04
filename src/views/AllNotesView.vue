@@ -6,20 +6,31 @@ import type { Note } from '@/types/notes'
 const notes = ref<Note[]>([])
 const { getAllNotes } = useNotes()
 
-onMounted(() => {
-  const data = getAllNotes()
+onMounted(async () => {
+  const data = await getAllNotes()
   if (data) {
     notes.value = data
   }
 })
+
+const filterNotes = (id: string) => {
+  const filteredNotes = notes.value.filter((item) => item.id !== id)
+  notes.value = filteredNotes
+  return notes.value
+}
 </script>
 
 <template>
   <div class="container">
     <h2>Browse Your Notes</h2>
 
-    <div class="all-notes" v-if="notes">
-      <NoteCard v-for="note in notes" :key="note.id" :note="note" />
+    <div class="all-notes" v-if="notes.length !== 0">
+      <NoteCard
+        v-for="note in notes"
+        :key="note.id"
+        :modelValue="note"
+        :filterNotes="filterNotes"
+      />
     </div>
   </div>
 </template>
