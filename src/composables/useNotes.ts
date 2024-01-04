@@ -36,13 +36,12 @@ export const useNotes = () => {
   const setNotes = () => {
     if (!localStorage) return
     localStorage.setItem('notes', JSON.stringify(notes.value))
-    console.log(localStorage.getItem('notes'))
   }
 
   const addNote = (note: Note) => {
     if (!localStorage) return
     notes.value.push(note)
-    console.log(notes.value)
+
     setNotes()
   }
 

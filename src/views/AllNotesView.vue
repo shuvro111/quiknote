@@ -12,8 +12,6 @@ onMounted(() => {
     notes.value = data
   }
 })
-
-console.log(notes)
 </script>
 
 <template>
