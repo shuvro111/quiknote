@@ -47,7 +47,7 @@ const removeNote = (id: string) => {
 </script>
 
 <template>
-  <div class="container">
+  <div class="container main">
     <div class="top">
       <h2 type="text" class="title">
         {{ note.title }}
@@ -90,5 +90,16 @@ const removeNote = (id: string) => {
   display: flex;
   align-items: center;
   gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .top {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  .buttons-group {
+    margin-top: 1rem;
+  }
 }
 </style>

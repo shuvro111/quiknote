@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { RouterView, RouterLink } from 'vue-router'
 import Header from '@/components/Header.vue'
+import Footer from '@/components/Footer.vue'
+
 import { HiSolidPlusCircle, BsEyeFill } from '@kalimahapps/vue-icons'
 </script>
 
@@ -27,6 +29,7 @@ import { HiSolidPlusCircle, BsEyeFill } from '@kalimahapps/vue-icons'
     </template>
   </Header>
   <RouterView />
+  <Footer />
 </template>
 
 <style scoped>
@@ -64,5 +67,31 @@ import { HiSolidPlusCircle, BsEyeFill } from '@kalimahapps/vue-icons'
 }
 .primary-btn-icon {
   font-size: 1.6rem;
+}
+
+@media (max-width: 640px) {
+  .logo {
+    gap: 0.2rem;
+  }
+  .logo img {
+    width: 35px;
+    height: 35px;
+  }
+  .brand-name {
+    font-size: 1.5rem;
+  }
+  .buttons-group {
+    gap: 0.5rem;
+  }
+
+  .button,
+  .button-secondary {
+    font-size: 0.8rem;
+    padding: 0.8rem;
+  }
+  .primary-btn-icon,
+  .secondary-btn-icon {
+    display: none;
+  }
 }
 </style>

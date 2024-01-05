@@ -10,17 +10,15 @@ const { label, labelPosition } = defineProps<SwitchProps>()
 
 <template>
   <!-- Switch Component -->
-  <div class="switch-container">
-    <label
-      class="switch"
-      :style="{ flexDirection: labelPosition === 'left' ? 'row' : 'row-reverse' }"
-      :class="{ disabled: disabled }"
-    >
-      <input type="checkbox" v-model="modelValue" :disabled="disabled" />
-      <span class="slider"></span>
-      <span class="label">{{ label }}</span>
-    </label>
-  </div>
+  <label
+    class="switch"
+    :style="{ flexDirection: labelPosition === 'left' ? 'row' : 'row-reverse' }"
+    :class="{ disabled: disabled }"
+  >
+    <input type="checkbox" v-model="modelValue" :disabled="disabled" />
+    <span class="slider"></span>
+    <span class="label">{{ label }}</span>
+  </label>
 </template>
 
 <style scoped>
@@ -86,5 +84,14 @@ const { label, labelPosition } = defineProps<SwitchProps>()
 
 .switch input:checked + .slider:before {
   transform: translateX(1.5rem);
+}
+
+@media (max-width: 768px) {
+  .switch {
+    gap: 0.5rem;
+  }
+  .switch .label {
+    font-size: 0.9rem;
+  }
 }
 </style>

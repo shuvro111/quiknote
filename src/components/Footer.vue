@@ -16,8 +16,7 @@
   width: 100%;
   background-color: white;
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
-  position: absolute;
-  bottom: 0;
+  margin-top: 2rem;
 }
 .container {
   display: flex;
@@ -37,5 +36,16 @@
 .footer-text .link:hover {
   text-decoration: underline;
   text-decoration-color: rgb(166, 2, 255);
+}
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    gap: 0rem;
+  }
+
+  .footer-text {
+    font-size: 0.9rem;
+  }
 }
 </style>

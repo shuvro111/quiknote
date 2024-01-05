@@ -42,7 +42,7 @@ const onDelete = (id: string) => {
 </script>
 
 <template>
-  <div class="container">
+  <div class="container main">
     <div class="top">
       <h2>Browse Your Notes</h2>
       <div class="right">
@@ -86,6 +86,7 @@ const onDelete = (id: string) => {
   display: flex;
   align-items: center;
   gap: 3rem;
+  justify-content: end;
 }
 
 .all-notes {
@@ -122,5 +123,31 @@ const onDelete = (id: string) => {
 .not-found .link:hover {
   text-decoration: underline;
   text-decoration-color: var(--foreground);
+}
+
+@media (max-width: 1024px) {
+  .all-notes {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .top {
+    justify-content: start;
+    gap: 0.5rem;
+  }
+
+  .top h2 {
+    font-size: 1.4rem;
+  }
+
+  .top .right {
+    flex: 1;
+    gap: 0.5rem;
+  }
+
+  .all-notes {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
 </style>

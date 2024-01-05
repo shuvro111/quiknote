@@ -30,4 +30,19 @@ const router = useRouter()
   font-size: 1.4rem;
   font-weight: 700;
 }
+
+@media (max-width: 768px) {
+  .go-back-button .btn-text {
+    font-size: 0.9rem;
+  }
+
+  .go-back-button .btn-icon {
+    font-size: 1.2rem;
+  }
+}
+@media (max-width: 640px) {
+  .go-back-button {
+    display: none;
+  }
+}
 </style>

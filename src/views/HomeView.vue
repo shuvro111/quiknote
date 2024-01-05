@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import Footer from './Footer.vue'
 import { BsGithub } from '@kalimahapps/vue-icons'
 </script>
 
 <template>
-  <div class="container">
+  <div class="container main">
     <div class="badge">
       <span class="badge-text">Capture Ideas in a Flash!</span>
     </div>
@@ -23,8 +22,6 @@ import { BsGithub } from '@kalimahapps/vue-icons'
       </div>
     </div>
   </div>
-
-  <Footer />
 </template>
 
 <style scoped>
@@ -63,10 +60,12 @@ import { BsGithub } from '@kalimahapps/vue-icons'
 .title {
   font-size: 3.4rem;
   text-align: center;
+  line-height: 3.8rem;
+  text-transform: capitalize;
 }
 .highlighted-title {
   position: relative;
-  font-size: 40px;
+  font-size: 3.2rem;
   color: white;
   text-align: center;
   background: linear-gradient(to bottom right, #5500ff, #e92d9c);
@@ -107,6 +106,7 @@ import { BsGithub } from '@kalimahapps/vue-icons'
 .buttons-group {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 1rem;
 }
 .button.secondary {
@@ -115,5 +115,40 @@ import { BsGithub } from '@kalimahapps/vue-icons'
   display: flex;
   align-items: center;
   gap: 0.5rem;
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.4rem;
+    line-height: 2.8rem;
+  }
+  .highlighted-title {
+    font-size: 2.2rem;
+  }
+  .description {
+    font-size: 1.4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .description {
+    font-size: 1rem;
+  }
+
+  .buttons-group {
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    align-items: center;
+  }
+
+  .buttons-group .button {
+    text-align: center;
+    width: 100%;
+  }
+
+  .buttons-group .button.secondary {
+    justify-content: center;
+  }
 }
 </style>

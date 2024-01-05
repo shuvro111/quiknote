@@ -76,9 +76,18 @@ const removeNote = (id: string) => {
   display: flex;
   justify-content: space-between;
   gap: 2rem;
+  margin-top: 1rem;
 }
 
 .bottom {
   align-items: center;
+}
+
+@media (max-width: 768px) {
+  .bottom {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
 }
 </style>

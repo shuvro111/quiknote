@@ -142,5 +142,23 @@ interface ToolbarProps {
   display: flex;
   align-items: center;
   gap: 2rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 1024px) {
+  .toolbar {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .toolbar {
+    gap: 0.8rem;
+  }
+}
+@media (max-width: 640px) {
+  .toolbar {
+    gap: 1rem;
+  }
 }
 </style>

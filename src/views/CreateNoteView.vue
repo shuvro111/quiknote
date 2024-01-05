@@ -157,4 +157,19 @@ const onSubmit = () => {
   gap: 0.5rem;
   font-weight: 600;
 }
+
+@media (max-width: 640px) {
+  .title-input {
+    font-size: 1.4rem;
+  }
+
+  .add-to-favorite {
+    font-size: 1.1rem;
+    gap: 0.3rem;
+  }
+
+  .favorite-icon {
+    font-size: 1.3rem;
+  }
+}
 </style>
