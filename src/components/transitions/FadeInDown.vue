@@ -1,12 +1,3 @@
-<script lang="ts" setup>
-interface FadeInDownProps {
-  // offset: number
-  // duration: number
-  /* in milliseconds */
-  // delay: number
-  // easing: string
-}
-</script>
 <template>
   <Transition name="fade-in-down" appear>
     <slot>Content</slot>

@@ -5,6 +5,7 @@ import GoBackButton from '@/components/GoBackButton.vue'
 import { onMounted, ref, computed } from 'vue'
 import type { Note } from '@/types/notes'
 import Switch from '@/components/Switch.vue'
+import { RouterLink } from 'vue-router'
 
 const { getAllNotes } = useNotes()
 
@@ -46,13 +47,16 @@ const onDelete = (id: string) => {
       <h2>Browse Your Notes</h2>
       <div class="right">
         <GoBackButton path="/" label="Back To Homepage" />
-        <Switch label="Favorites Only" label-position="right" v-model="onlyFavorites" />
+        <Switch
+          label="Favorites Only"
+          label-position="right"
+          v-model="onlyFavorites"
+          :disabled="!filteredNotes.length"
+        />
       </div>
     </div>
 
-    {{ onlyFavorites }}
-
-    <div class="all-notes" v-if="filterNotes.length !== 0">
+    <div class="all-notes" v-if="filteredNotes.length > 0">
       <NoteCard
         v-for="(note, index) in filteredNotes"
         :key="note.id"
@@ -60,6 +64,13 @@ const onDelete = (id: string) => {
         :on-delete="onDelete"
         :card-color="setCardColor(index)"
       />
+    </div>
+    <div v-else class="not-found">
+      <h2 class="heading">No Notes Found</h2>
+      <p class="instruction">
+        Create a new note by clicking on the
+        <RouterLink to="/create-note" class="link"><strong>Create Note</strong></RouterLink> button
+      </p>
     </div>
   </div>
 </template>
@@ -87,5 +98,29 @@ const onDelete = (id: string) => {
 
 .container {
   margin-top: 2rem;
+}
+
+.not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  justify-content: center;
+  height: 50vh;
+}
+
+.not-found .heading {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--foreground);
+  opacity: 0.3;
+}
+
+.not-found .link {
+  color: var(--foreground);
+}
+.not-found .link:hover {
+  text-decoration: underline;
+  text-decoration-color: var(--foreground);
 }
 </style>

@@ -19,9 +19,9 @@ import { HiSolidPlusCircle, BsEyeFill } from '@kalimahapps/vue-icons'
           <span>Browse Notes</span>
           <BsEyeFill class="secondary-btn-icon" />
         </RouterLink>
-        <RouterLink class="button" to="/add-note">
+        <RouterLink class="button" to="/create-note">
           <HiSolidPlusCircle class="primary-btn-icon" />
-          <span>Add Note</span>
+          <span>Create Note</span>
         </RouterLink>
       </div>
     </template>

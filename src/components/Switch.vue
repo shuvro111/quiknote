@@ -2,6 +2,7 @@
 interface SwitchProps {
   label: string
   labelPosition: 'left' | 'right'
+  disabled?: boolean
 }
 const modelValue = defineModel<boolean>()
 const { label, labelPosition } = defineProps<SwitchProps>()
@@ -13,8 +14,9 @@ const { label, labelPosition } = defineProps<SwitchProps>()
     <label
       class="switch"
       :style="{ flexDirection: labelPosition === 'left' ? 'row' : 'row-reverse' }"
+      :class="{ disabled: disabled }"
     >
-      <input type="checkbox" v-model="modelValue" />
+      <input type="checkbox" v-model="modelValue" :disabled="disabled" />
       <span class="slider"></span>
       <span class="label">{{ label }}</span>
     </label>
@@ -39,6 +41,12 @@ const { label, labelPosition } = defineProps<SwitchProps>()
 .switch .label {
   font-weight: 600;
   color: #111111;
+}
+
+.switch.disabled,
+.switch.disabled .slider {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 /* Hide default HTML checkbox */

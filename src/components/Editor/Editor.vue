@@ -57,5 +57,6 @@ const editor = useEditor({
   padding: 2rem;
   background: #ffffff;
   font-size: inherit;
+  min-height: 50vh;
 }
 </style>

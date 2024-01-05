@@ -1,9 +1,6 @@
 <template>
-  <div class="note-title">
-    Title
-  </div>
+  <div class="note-title">Title</div>
 </template>
-
 
 <style scoped>
 .note-title {
