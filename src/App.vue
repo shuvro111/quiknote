@@ -39,6 +39,7 @@ import { HiSolidPlusCircle, BsEyeFill } from '@kalimahapps/vue-icons'
 .brand-name {
   font-weight: 700;
   font-size: 2rem;
+  color: var(--foreground);
 }
 
 .buttons-group {

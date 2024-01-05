@@ -9,15 +9,6 @@
   --accent-hover: #f8a647;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    --background: #030712;
-    --foreground: #ecfdf5;
-    --accent: #fed300;
-    --accent-hover: #f8a647;
-  }
-}
-
 *,
 *::before,
 *::after {
