@@ -12,7 +12,7 @@ defineProps<ToolItemProps>()
 
 <template>
   <button :title="title" @click="command" type="button">
-    <icon></icon>
+    <component :is="icon" />
   </button>
 </template>
 
