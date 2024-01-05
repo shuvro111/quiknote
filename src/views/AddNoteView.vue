@@ -2,8 +2,10 @@
 import { ref } from 'vue'
 import { useNotes } from '@/composables/useNotes'
 import { type Note } from '@/types/notes'
+import { useRouter } from 'vue-router'
 
 import Editor from '@/components/Editor/Editor.vue'
+import GoBackButton from '@/components/GoBackButton.vue'
 
 import { BsArrowRight, BxSolidStar } from '@kalimahapps/vue-icons'
 
@@ -11,6 +13,7 @@ const title = ref('')
 const content = ref('')
 const isFavorite = ref(false)
 
+const router = useRouter()
 const { addNote } = useNotes()
 
 //write a function to generate uuid
@@ -63,6 +66,7 @@ const onSubmit = () => {
     //handle submit
     resetForm()
     addNote(data)
+    router.push('/notes')
   }
 }
 </script>
@@ -82,7 +86,10 @@ const onSubmit = () => {
           <BxSolidStar class="favorite-icon" />
         </div>
 
-        <button type="submit" class="button submit">Submit <BsArrowRight /></button>
+        <div class="buttons-group">
+          <GoBackButton label="Go Back" />
+          <button type="submit" class="button submit">Submit <BsArrowRight /></button>
+        </div>
       </div>
       <input type="text" v-model="title" placeholder="Enter a title" class="title-input" />
 
@@ -92,12 +99,22 @@ const onSubmit = () => {
 </template>
 
 <style scoped>
+.container {
+  margin-top: 2rem;
+}
+
 .add-note .note-form .top {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 2rem;
   margin-bottom: 2rem;
+}
+
+.buttons-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .title-input {

@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { useNotes } from '@/composables/useNotes'
 import { type Note } from '@/types/notes'
 
-import { BsArrowRight, BxSolidStar } from '@kalimahapps/vue-icons'
+import ActionButtons from '@/components/ActionButtons.vue'
+import GoBackButton from '@/components/GoBackButton.vue'
 
 const note = ref<Note>({
   id: '',
@@ -15,7 +16,8 @@ const note = ref<Note>({
 })
 
 const route = useRoute()
-const { getNote, updateNote } = useNotes()
+const router = useRouter()
+const { getNote, updateNote, deleteNote } = useNotes()
 
 onMounted(async () => {
   const id = route.params.id
@@ -35,6 +37,13 @@ const toggleFavorite = (id: string) => {
     note.value.isFavorite = !note.value.isFavorite
   }
 }
+
+const removeNote = (id: string) => {
+  if (window.confirm('Are you sure you want to delete this note?')) {
+    deleteNote(id)
+    router.push('/notes')
+  }
+}
 </script>
 
 <template>
@@ -43,23 +52,25 @@ const toggleFavorite = (id: string) => {
       <h2 type="text" class="title">
         {{ note.title }}
       </h2>
-      <div
-        class="add-to-favorite"
-        :class="{ favorite: note.isFavorite }"
-        @click="toggleFavorite(note.id)"
-      >
-        <span class="favorite-text">{{
-          note.isFavorite ? 'Remove From Favorites' : 'Add To Favorites'
-        }}</span>
-        <BxSolidStar class="favorite-icon" />
+      <div class="buttons-group">
+        <GoBackButton path="/notes" label="Back to Notes" />
+        <ActionButtons
+          :note="note"
+          :remove-note="removeNote"
+          :buttons="['favorite', 'edit', 'delete']"
+          :toggle-favorite="toggleFavorite"
+        />
       </div>
     </div>
 
-    <div class="" v-html="note.content"></div>
+    <div class="content" v-html="note.content"></div>
   </div>
 </template>
 
 <style scoped>
+.container {
+  margin-top: 2rem;
+}
 .top {
   width: 100%;
   display: flex;
@@ -75,20 +86,9 @@ const toggleFavorite = (id: string) => {
   font-size: 1.6rem;
 }
 
-.add-to-favorite {
+.buttons-group {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  cursor: pointer;
-  font-size: 1.2rem;
-  font-weight: 500;
-}
-
-.favorite-icon {
-  font-size: 1.8rem;
-}
-
-.favorite .favorite-icon {
-  color: #fed300 !important;
+  gap: 1rem;
 }
 </style>

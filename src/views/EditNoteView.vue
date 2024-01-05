@@ -5,6 +5,7 @@ import { useNotes } from '@/composables/useNotes'
 import { type Note } from '@/types/notes'
 
 import Editor from '@/components/Editor/Editor.vue'
+import GoBackButton from '@/components/GoBackButton.vue'
 
 import { BsArrowRight, BxSolidStar } from '@kalimahapps/vue-icons'
 
@@ -83,7 +84,10 @@ const onSubmit = () => {
           <BxSolidStar class="favorite-icon" />
         </div>
 
-        <button type="submit" class="button submit">Submit <BsArrowRight /></button>
+        <div class="buttons-group">
+          <GoBackButton label="Go Back" />
+          <button type="submit" class="button submit">Submit <BsArrowRight /></button>
+        </div>
       </div>
       <input type="text" v-model="note.title" placeholder="Enter a title" class="title-input" />
 
@@ -93,12 +97,22 @@ const onSubmit = () => {
 </template>
 
 <style scoped>
+.container {
+  margin-top: 2rem;
+}
+
 .add-note .note-form .top {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 2rem;
   margin-bottom: 2rem;
+}
+
+.buttons-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 }
 
 .title-input {
